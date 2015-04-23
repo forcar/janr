@@ -1,10 +1,3 @@
-#CREATED_F=janr_main.F
-#LIBNAMES  = $(MAIN_DIRECTORY)$(DEBUG) 
-#LIBNAMES=  janr03 $(GSIM_INT_LIBS) $(GSIM_INT_MD_LIBS)
-#SHARED_LIBS=$(GSIM_INT_SHARED_LIBS)
-#include $(CLAS_CMS)/Makefile
-
-
 .PHONY: all clean
 
 #CXXFLAGS = -pipe -Wall -Wextra -Weffc++ -pedantic -ggdb
@@ -19,7 +12,6 @@ OBJS += abort_rut.o
 all: janr 
 
 lib: $(OBJS)
-		#gcc -c abort_rut.c
 		ar rv libjanr.a $(OBJS) 
 
 clean:
