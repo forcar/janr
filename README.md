@@ -1,5 +1,4 @@
 # janr
 JLAB Analysis Nucleon Resonances
 
-
-http://galileo4.phys.virginia.edu/~lcs1h/codes/janr2003/janr2003.html
+https://userweb.jlab.org/~lcsmith/galileo4/codes/janr2003/
