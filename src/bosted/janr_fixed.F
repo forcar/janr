@@ -88,8 +88,13 @@ c      do iq=1,11
 c      do iq=11,11
 c       q2 = (q2minexcl(iq) + q2maxexcl(iq))/2.
 c for eg1-dvcs
-      do iq=1,25
-       q2 = 0.2 * iq
+c      do iq=1,25
+c     q2 = 0.2 * iq
+      
+c for e1e-ppim
+      do iq=1,3
+         q2 = 0.4 + 0.2*(iq-0.5)
+      
       print *, 'New Q2=',q2
 
 c LCS: The mult_ana subroutines should be called inside the Q2 loop 
@@ -100,8 +105,13 @@ c LCS: The mult_ana subroutines should be called inside the Q2 loop
       CALL JANR_ini_point(Q2)
 
 c for eg1b, eg1c      
-      do iw=1,46
-      w = 1.1 + 0.02*(iw-1)
+c      do iw=1,46
+c     w = 1.1 + 0.02*(iw-1)
+      
+c for e1e-ppim
+      do iw=1,29
+         w=1.1 + 0.025*(iw-0.5)
+      
 c for e16
 c      do iw=1,22
 c      w = 1.1 + 0.04*(iw-1)
@@ -110,9 +120,13 @@ c      do iw=1,31
 c       w = 1.1 + 0.03*(iw-1)
 
 c for eg1dvcs
-      do it=1,6
+c      do it=1,6
 c       costh = (cthminc(it) + cthmaxc(it))/2. ! eg1
-       costh = cth(it) ! eg1b
+c       costh = cth(it) ! eg1b
+         
+c for e1e-ppim
+         do it=1,10
+            costh = -1 + 0.2*(it-0.5)
 c for eg1b
 c      do it = 1,12
 c      costh = (cthmin(it) + cthmax(it))/2.
@@ -165,29 +179,39 @@ c      CALL cross_sections(S,phi,epsilon,sinth,costh)
 
       call response_functions (s)
 
-      wfact = 1.
+c      wfact = 1.
       if(w.gt.1.232) wfact = (w -1.132)/100.
       do ipi=1,2
        write(6+ipi,'(f11.6,18F8.4)')
-     >  sigmat(ipi) * wfact * q2,
+     >  sigmaT(ipi) * wfact * q2,
      >  sigmaL(ipi)/sigmaT(ipi),
      >  sigmaTL(ipi)/sigmaT(ipi),
-     >  sigmaTT(ipi)/sigmaT(ipi),
-     >  sigmaTLZ(ipi)/sigmaT(ipi),
-     >  sigmaTTZ(ipi)/sigmaT(ipi),
-     >  sigmaTLPZ(ipi)/sigmaT(ipi),
-     >  sigmaTTPZ(ipi)/sigmaT(ipi),
-     >  sigmaTLP(ipi)/sigmaT(ipi),
-     >  sigmaTLX(ipi)/sigmaT(ipi),
-     >  sigmaTLY(ipi)/sigmaT(ipi),
-     >  sigmaTTX(ipi)/sigmaT(ipi),
-     >  sigmaTTY(ipi)/sigmaT(ipi),
-     >  sigmaTLpX(ipi)/sigmaT(ipi),
-     >  sigmaTLpY(ipi)/sigmaT(ipi),
-     >  sigmaTTpX(ipi)/sigmaT(ipi),
-     >  sigmaLY(ipi)/sigmaT(ipi),
-     >  sigmaTY(ipi)/sigmaT(ipi)
-      enddo
+     >  sigmaTT(ipi)/sigmaT(ipi)
+       enddo
+
+c      wfact = 1.
+c      if(w.gt.1.232) wfact = (w -1.132)/100.
+c      do ipi=1,2
+c       write(6+ipi,'(f11.6,18F8.4)')
+c     >  sigmat(ipi) * wfact * q2,
+c     >  sigmaL(ipi)/sigmaT(ipi),
+c     >  sigmaTL(ipi)/sigmaT(ipi),
+c     >  sigmaTT(ipi)/sigmaT(ipi),
+c     >  sigmaTLZ(ipi)/sigmaT(ipi),
+c     >  sigmaTTZ(ipi)/sigmaT(ipi),
+c     >  sigmaTLPZ(ipi)/sigmaT(ipi),
+c     >  sigmaTTPZ(ipi)/sigmaT(ipi),
+c     >  sigmaTLP(ipi)/sigmaT(ipi),
+c     >  sigmaTLX(ipi)/sigmaT(ipi),
+c     >  sigmaTLY(ipi)/sigmaT(ipi),
+c     >  sigmaTTX(ipi)/sigmaT(ipi),
+c     >  sigmaTTY(ipi)/sigmaT(ipi),
+c     >  sigmaTLpX(ipi)/sigmaT(ipi),
+c     >  sigmaTLpY(ipi)/sigmaT(ipi),
+c     >  sigmaTTpX(ipi)/sigmaT(ipi),
+c     >  sigmaLY(ipi)/sigmaT(ipi),
+c     >  sigmaTY(ipi)/sigmaT(ipi)
+c      enddo
 
       enddo ! loop on costh
       enddo ! loop on W
