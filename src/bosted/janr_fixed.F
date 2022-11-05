@@ -179,14 +179,13 @@ c      CALL cross_sections(S,phi,epsilon,sinth,costh)
 
       call response_functions (s)
 
-c      wfact = 1.
-      if(w.gt.1.232) wfact = (w -1.132)/100.
       do ipi=1,2
-       write(6+ipi,'(f11.6,18F8.4)')
-     >  sigmaT(ipi) * wfact * q2,
-     >  sigmaL(ipi)/sigmaT(ipi),
-     >  sigmaTL(ipi)/sigmaT(ipi),
-     >  sigmaTT(ipi)/sigmaT(ipi)
+        write(6+ipi,'(7F8.4)')
+     >  q2,w,costh,  
+     >  sigmaT(ipi),
+     >  sigmaL(ipi),
+     >  sigmaTL(ipi),
+     >  sigmaTT(ipi)
        enddo
 
 c      wfact = 1.
